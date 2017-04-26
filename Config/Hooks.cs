@@ -57,7 +57,7 @@ namespace Test_AAT.Config
             _idriver = new ChromeDriver();
             _objectContainer.RegisterInstanceAs<IWebDriver>(_idriver);
             _idriver.Navigate().GoToUrl(ConfigurationManager.AppSettings.Get("BaseUrl"));
-            //_idriver.Manage().Window.Maximize();
+            _idriver.Manage().Window.Maximize();
         }
 
         ///// Run on BrowserStack
