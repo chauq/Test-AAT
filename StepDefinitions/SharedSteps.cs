@@ -22,14 +22,36 @@ namespace Test_AAT.StepDefinitions
         }
 
 
-        [Then(@"Validate H2 page displayed '(.*)'")]
-        public void ThenValidateHPageDisplayed(string pageTitle)
+        //[Then(@"Validate H2 page displayed '(.*)'")]
+        //public void ThenValidateHPageDisplayed(string pageTitle)
+        //{
+        //    TaskHelper.ExecuteTask(() =>
+        //    {
+        //        new WebDriverExtensions(_driver).Hilight(_driver.FindElement(By.XPath(_sharedSelectors.H2PageTitle(pageTitle))));
+        //        new WebDriverExtensions(_driver).WaitForPresence(
+        //            _driver.FindElement(By.XPath(_sharedSelectors.H2PageTitle(pageTitle))));
+        //    });
+        //}
+
+        [When(@"Click on link '(.*)'")]
+        public void WhenClickOnLink(string link)
         {
             TaskHelper.ExecuteTask(() =>
             {
-                new WebDriverExtensions(_driver).Hilight(_driver.FindElement(By.XPath(_sharedSelectors.H2PageTitle(pageTitle))));
                 new WebDriverExtensions(_driver).WaitForPresence(
-                    _driver.FindElement(By.XPath(_sharedSelectors.H2PageTitle(pageTitle))));
+                    _driver.FindElement(By.XPath(_sharedSelectors.ATag(link))));
+                _driver.FindElement(By.XPath(_sharedSelectors.ATag(link))).Click();
+            });
+        }
+
+        [Then(@"Validate H(.*) page displayed '(.*)'")]
+        public void ThenValidateHPageDisplayed(string hTitle, string pageTitle)
+        {
+            TaskHelper.ExecuteTask(() =>
+            {
+                new WebDriverExtensions(_driver).Hilight(_driver.FindElement(By.XPath(_sharedSelectors.HAnyPageTitle(hTitle, pageTitle))));
+                new WebDriverExtensions(_driver).WaitForPresence(
+                    _driver.FindElement(By.XPath(_sharedSelectors.HAnyPageTitle(hTitle, pageTitle))));
             });
         }
     }
