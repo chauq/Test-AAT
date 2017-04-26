@@ -128,5 +128,16 @@ namespace Test_AAT.Helpers
                 throw new ApplicationException(String.Format("{0}. Selector: {1}", e.Message, element));
             }
         }
+
+        public void Hilight(IWebElement element)
+        {
+            Hilight(element, _driver);
+        }
+
+        public static void Hilight(IWebElement element, IWebDriver driver)
+        {
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].style.border='3px solid red'", element);
+        }
     }
 }
