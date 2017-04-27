@@ -6,6 +6,7 @@ namespace Test_AAT.Selectors
 {
     public class HeaderSelectors
     {
+        //test comment
         [FindsBy(How = How.Id, Using = "logo")]
         public IWebElement SiteLogo { get; set; }
 
