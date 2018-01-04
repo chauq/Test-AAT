@@ -38,9 +38,9 @@ namespace Test_AAT.StepDefinitions
         {
             TaskHelper.ExecuteTask(() =>
             {
-                new WebDriverExtensions(_driver).WaitForPresence(
+                new WebDriverExtensions(_driver).Hilight(
                     _driver.FindElement(By.XPath(_sharedSelectors.ATag(link))));
-                _driver.FindElement(By.XPath(_sharedSelectors.ATag(link))).Click();
+                new WebDriverExtensions(_driver).ClickOnATagText(link);
             });
         }
 

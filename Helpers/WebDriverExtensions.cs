@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Test_AAT.Config;
+using System.Threading;
 
 namespace Test_AAT.Helpers
 {
@@ -138,6 +139,31 @@ namespace Test_AAT.Helpers
         {
             IJavaScriptExecutor js = driver as IJavaScriptExecutor;
             js.ExecuteScript("arguments[0].style.border='3px solid red'", element);
+        }
+
+        public void SeleniumClick(IWebElement element)
+        {
+            element.Click();
+        }
+
+        internal void SeleniumClickAndWait(IWebElement element)
+        {
+            SeleniumClick(element);
+            Thread.Sleep(5000);
+        }
+
+        public void ClickOnATagText(string text)
+        {
+            string xPathString = string.Format("//a[contains(text(),'{0}')]", text);
+            try
+            {
+                new WebDriverExtensions(_driver).WaitForPresence(_driver.FindElement(By.XPath(xPathString)));
+                new WebDriverExtensions(_driver).SeleniumClick(_driver.FindElement(By.XPath(xPathString)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
